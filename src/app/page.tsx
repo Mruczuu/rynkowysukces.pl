@@ -1,65 +1,212 @@
-import Image from "next/image";
+import { EmailCapture } from "@/components/EmailCapture";
+import { Button } from "@/components/Button";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <>
+      {/* ─── HERO ─── */}
+      <section className="relative min-h-[100svh] flex items-center overflow-hidden px-5 py-16">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(201,168,76,0.06)_0%,transparent_50%)]" />
+
+        <div className="relative mx-auto w-full max-w-2xl">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">
+            2 647 traderów już korzysta z narzędzia
+          </p>
+
+          <h1 className="mt-5 text-[2.5rem] font-extrabold leading-[1.08] tracking-tight md:text-6xl">
+            Tracisz transakcje,
+            <br />
+            które powinieneś{" "}
+            <span className="text-gold">wygrywać.</span>
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+
+          <p className="mt-5 max-w-lg text-base leading-relaxed text-muted md:text-lg">
+            Kompletny przewodnik jak zawierać transakcje używając mojego narzędzia.
+            2 647 traderów już korzysta.
+          </p>
+
+          <ul className="mt-8 space-y-3">
+            {[
+              "3 potwierdzenia z rynku, które umożliwiają wejście w transakcję odrzucając nadmierne ryzyko",
+              "Przewodnik zarządzania ryzykiem, który chroni Twój kapitał",
+              "Konkretne miejsca na wykresie, gdzie możesz zawierać transakcje",
+              "Zmiana psychologii stojąca za 87% skutecznością",
+            ].map((item) => (
+              <li key={item} className="flex items-start gap-3 text-sm text-foreground/90">
+                <svg
+                  className="mt-0.5 h-4 w-4 shrink-0 text-gold"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={3}
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+
+          <div className="mt-10">
+            <EmailCapture buttonText="Pobierz za darmo nasz przewodnik" />
+          </div>
+
+          <p className="mt-4 text-[11px] text-muted/70">
+            Pobierz za darmo nasz przewodnik.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      {/* ─── PROOF ─── */}
+      <section className="border-y border-border bg-surface px-5 py-16 md:py-20">
+        <div className="mx-auto max-w-2xl">
+          <div className="text-center">
+            <p className="text-4xl font-extrabold md:text-5xl">
+              <span className="text-gold">52 700 zł</span>
+            </p>
+            <p className="mt-2 text-sm text-muted">
+              Tyle zarobił jeden z czytelników w ciągu miesiąca. Jeden ebook. Jedno narzędzie.
+            </p>
+          </div>
+
+          <div className="mt-12 grid gap-6 md:grid-cols-2">
+            <div className="flex flex-col rounded-xl border border-border bg-background p-5">
+              <p className="text-sm leading-relaxed text-foreground/80">
+                &ldquo;Przez 2 lata traciłem pieniądze nie posiadając odpowiedniej wiedzy,
+                lecz po przeczytaniu tego ebooka znalazłem system, który pozwolił
+                mi odrobić straty w ciągu 6 tygodni.&rdquo;
+              </p>
+              <div className="mt-auto pt-4 flex items-center gap-3">
+                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gold/15 text-xs font-bold text-gold">
+                  M
+                </div>
+                <div>
+                  <p className="text-xs font-semibold">Marcin T.</p>
+                  <p className="text-[11px] text-gold">+37 350 zł w pierwszym miesiącu</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex flex-col rounded-xl border border-border bg-background p-5">
+              <p className="text-sm leading-relaxed text-foreground/80">
+                &ldquo;Sama sekcja o zarządzaniu ryzykiem bije każdy kurs za 5 000 PLN,
+                na który wydałem pieniądze. Tego nikt nie uczy.&rdquo;
+              </p>
+              <div className="mt-auto pt-4 flex items-center gap-3">
+                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gold/15 text-xs font-bold text-gold">
+                  D
+                </div>
+                <div>
+                  <p className="text-xs font-semibold">Dawid R.</p>
+                  <p className="text-[11px] text-gold">72% skuteczności po 47 dniach</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </main>
-    </div>
+      </section>
+
+      {/* ─── WYNIKI I OPINIE ─── */}
+      <section className="px-5 py-16 md:py-20">
+        <div className="mx-auto max-w-3xl">
+          <div className="text-center">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">
+              Realne wyniki naszych czytelników
+            </p>
+            <h2 className="mt-4 text-2xl font-extrabold tracking-tight md:text-3xl">
+              Nie wierz nam na słowo — zobacz sam
+            </h2>
+          </div>
+
+          <div className="mt-12 grid gap-5 md:grid-cols-2">
+            {/* eslint-disable @next/next/no-img-element */}
+            <img
+              src="/result-1.png"
+              alt="Wynik transakcji +2 340 PLN"
+              className="w-full rounded-xl border border-border"
+            />
+            <img
+              src="/result-2.png"
+              alt="Podsumowanie konta +8 750 PLN"
+              className="w-full rounded-xl border border-border"
+            />
+            <img
+              src="/opinion-1.png"
+              alt="Opinia — pierwszy miesiąc na plusie"
+              className="w-full rounded-xl border border-border"
+            />
+            <img
+              src="/opinion-2.png"
+              alt="Opinia — 72% skuteczności po 3 tygodniach"
+              className="w-full rounded-xl border border-border"
+            />
+            {/* eslint-enable @next/next/no-img-element */}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── UPSELL ─── */}
+      <section className="px-5 py-16 md:py-20">
+        <div className="mx-auto max-w-2xl">
+          <div className="rounded-2xl border border-gold/20 bg-surface p-8 md:p-10">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">
+              Darmowy ebook to tylko 20% systemu
+            </p>
+
+            <h2 className="mt-4 text-2xl font-extrabold tracking-tight md:text-3xl">
+              Chcesz pełny system?
+            </h2>
+
+            <p className="mt-3 text-sm text-muted leading-relaxed">
+              Odblokuj narzędzie, dzięki któremu stworzysz realną przewagę na rynku
+              i zaczniesz zarabiać prawdziwe pieniądze.
+            </p>
+
+            <ul className="mt-6 space-y-3">
+              {[
+                "Autorskie narzędzie Pawła Wichrowskiego z ponad 3-letnim stażem",
+                "Jedno narzędzie, które możesz natychmiastowo wykorzystać w swoim tradingu",
+                "Psychologia rynku — jak duzi gracze łapią nieświadomych traderów w pułapki",
+                "Dożywotnie aktualizacje — nowe strategie co kwartał",
+              ].map((item) => (
+                <li key={item} className="flex items-start gap-3 text-sm">
+                  <svg
+                    className="mt-0.5 h-4 w-4 shrink-0 text-gold"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={3}
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+
+            <div className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+              <Button href="#" variant="primary" size="lg">
+                Odblokuj pełny system — 499 PLN
+              </Button>
+              <div className="flex items-baseline gap-2">
+                <span className="text-sm text-muted line-through">759 PLN</span>
+                <span className="text-xs text-muted">cena premierowa</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── FOOTER ─── */}
+      <footer className="border-t border-border px-5 py-6">
+        <div className="mx-auto flex max-w-2xl items-center justify-between text-[11px] text-muted/60">
+          <p>© {new Date().getFullYear()} RynkowySukces</p>
+          <div className="flex gap-4">
+            <a href="/polityka-prywatnosci" className="hover:text-muted transition-colors">Polityka prywatności</a>
+            <a href="/regulamin" className="hover:text-muted transition-colors">Regulamin</a>
+          </div>
+        </div>
+      </footer>
+    </>
   );
 }
