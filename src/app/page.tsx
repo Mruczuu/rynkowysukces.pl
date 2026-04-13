@@ -1,5 +1,6 @@
 import { EmailCapture } from "@/components/EmailCapture";
 import { Button } from "@/components/Button";
+import { ProofTile } from "@/components/ProofTile";
 
 export default function Home() {
   return (
@@ -106,7 +107,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ─── WYNIKI I OPINIE ─── */}
+      {/* ─── WYNIKI I OPINIE (2×2 — górne 2: screeny wyników, dolne 2: opinie) ─── */}
       <section className="px-5 py-16 md:py-20">
         <div className="mx-auto max-w-3xl">
           <div className="text-center">
@@ -118,29 +119,27 @@ export default function Home() {
             </h2>
           </div>
 
-          <div className="mt-12 grid gap-5 md:grid-cols-2">
-            {/* eslint-disable @next/next/no-img-element */}
-            <img
-              src="/result-1.png"
-              alt="Wynik transakcji +2 340 PLN"
-              className="w-full rounded-xl border border-border"
+          <div className="mt-12 grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-8 md:mx-auto md:max-w-2xl">
+            <ProofTile
+              src="/wynik-transakcji.png"
+              caption="XAUUSD — 3 450,76 USD zysku z miesiąca pracy z narzędziem"
+              alt="Screen: wynik miesięczny na złocie w USD"
             />
-            <img
-              src="/result-2.png"
-              alt="Podsumowanie konta +8 750 PLN"
-              className="w-full rounded-xl border border-border"
+            <ProofTile
+              src="/podsumowanie-konta.png"
+              caption="Saldo 406 USD z jednego dnia handlu na złocie (XAUUSD)"
+              alt="Screen: saldo z jednego dnia na XAUUSD w USD"
             />
-            <img
-              src="/opinion-1.png"
-              alt="Opinia — pierwszy miesiąc na plusie"
-              className="w-full rounded-xl border border-border"
+            <ProofTile
+              src="/opinia-2.png"
+              caption="Opinia — pierwszy miesiąc na plusie"
+              alt="Opinia klienta z czatu"
             />
-            <img
-              src="/opinion-2.png"
-              alt="Opinia — 72% skuteczności po 3 tygodniach"
-              className="w-full rounded-xl border border-border"
+            <ProofTile
+              src="/opinia-1.png"
+              caption="Opinia — 72% skuteczności po 2 tygodniach"
+              alt="Opinia klienta — 72% skuteczności"
             />
-            {/* eslint-enable @next/next/no-img-element */}
           </div>
         </div>
       </section>
