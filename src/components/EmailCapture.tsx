@@ -8,7 +8,7 @@ import { createBrowserClient } from "@/lib/supabase/client";
 /** Prosty regex — wystarczający do podstawowej walidacji formatu email */
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-export function EmailCapture({ buttonText = "Pobierz darmowy ebook" }: { buttonText?: string }) {
+export function EmailCapture({ buttonText = "Pobierz za darmo nasz E-book" }: { buttonText?: string }) {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [submitting, setSubmitting] = useState(false);

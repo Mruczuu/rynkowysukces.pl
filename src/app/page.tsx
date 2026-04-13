@@ -49,11 +49,11 @@ export default function Home() {
           </ul>
 
           <div className="mt-10">
-            <EmailCapture buttonText="Pobierz za darmo nasz przewodnik" />
+            <EmailCapture buttonText="Pobierz za darmo nasz E-book" />
           </div>
 
           <p className="mt-4 text-[11px] text-muted/70">
-            Pobierz za darmo nasz przewodnik.
+            Pobierz za darmo nasz E-book.
           </p>
         </div>
       </section>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ChartBackground } from "@/components/ChartBackground";
+import { FomoToast } from "@/components/FomoToast";
 import "./globals.css";
 
 const inter = Inter({
@@ -31,6 +32,7 @@ export default function RootLayout({
       <body className="min-h-screen">
         <ChartBackground />
         <div className="relative z-10">{children}</div>
+        <FomoToast />
       </body>
     </html>
   );
