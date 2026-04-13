@@ -99,7 +99,7 @@ export default function Home() {
                 </div>
                 <div>
                   <p className="text-xs font-semibold">Dawid R.</p>
-                  <p className="text-[11px] text-gold">72% skuteczności po 47 dniach</p>
+                  <p className="text-[11px] text-gold">83% skuteczności po 47 dniach</p>
                 </div>
               </div>
             </div>
@@ -137,8 +137,8 @@ export default function Home() {
             />
             <ProofTile
               src="/opinia-1.png"
-              caption="Opinia — 72% skuteczności po 2 tygodniach"
-              alt="Opinia klienta — 72% skuteczności"
+              caption="Opinia — 83% skuteczności po 47 dniach"
+              alt="Opinia klienta — 83% skuteczności po 47 dniach"
             />
           </div>
         </div>
