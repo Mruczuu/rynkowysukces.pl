@@ -1,7 +1,5 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-
 /** ID pliku z linku: .../file/d/THIS_ID/view */
 const DRIVE_FILE_ID = "1nGaLWqVNBCRKHFED_nkqc5MzP_4qTUcc";
 
@@ -13,22 +11,8 @@ function driveDirectDownloadUrl(fileId: string) {
   return `https://drive.google.com/uc?export=download&id=${fileId}`;
 }
 
+/** Pobieranie tylko po kliknięciu — bez auto-otwierania przy wejściu na stronę */
 export function EbookDownload() {
-  const triedAuto = useRef(false);
-
-  useEffect(() => {
-    if (triedAuto.current) return;
-    triedAuto.current = true;
-
-    const url = driveDirectDownloadUrl(DRIVE_FILE_ID);
-    // Nowa karta: użytkownik zostaje na /dzieki, a pobieranie startuje w tle
-    const win = window.open(url, "_blank", "noopener,noreferrer");
-    if (!win) {
-      // Zablokowany popup — użytkownik użyje przycisku poniżej
-      console.warn("[ebook] Popup zablokowany — użyj przycisku „Pobierz ebook”.");
-    }
-  }, []);
-
   const href = driveDirectDownloadUrl(DRIVE_FILE_ID);
 
   return (
@@ -42,8 +26,7 @@ export function EbookDownload() {
         Pobierz ebook (PDF)
       </a>
       <p className="max-w-sm text-center text-xs text-muted">
-        Jeśli pobieranie nie ruszyło automatycznie, kliknij przycisk powyżej.
-        Na Dysku czasem pojawi się dodatkowe okno potwierdzenia — to normalne.
+        Kliknij przycisk i pobierz PDF.
       </p>
     </div>
   );

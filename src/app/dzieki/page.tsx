@@ -16,11 +16,9 @@ export default function DziekiPage() {
         Dziękujemy!
       </h1>
       <p className="mt-4 text-muted leading-relaxed">
-        Twój email został zapisany. Poniżej możesz od razu pobrać przewodnik w
-        formacie PDF.
+        Twój email został zapisany.
       </p>
 
-      {/* Automatyczne otwarcie linku pobierania + zapasowy przycisk */}
       <EbookDownload />
 
       <Link
