@@ -68,7 +68,7 @@ export function ChartBackground() {
       <img
         src="/bear.png"
         alt=""
-        className="absolute left-0 bottom-[10%] w-[clamp(220px,28vw,450px)] opacity-[0.25] md:left-4 lg:left-8"
+        className="absolute left-0 bottom-[10%] w-[clamp(220px,28vw,450px)] opacity-[0.05] md:left-4 lg:left-8"
       />
 
       {/* Bull — right side */}
@@ -76,7 +76,7 @@ export function ChartBackground() {
       <img
         src="/bull.png"
         alt=""
-        className="absolute right-0 bottom-[10%] w-[clamp(260px,32vw,500px)] opacity-[0.25] md:right-4 lg:right-8"
+        className="absolute right-0 bottom-[10%] w-[clamp(260px,32vw,500px)] opacity-[0.05] md:right-4 lg:right-8"
       />
 
       {/* Chart */}
