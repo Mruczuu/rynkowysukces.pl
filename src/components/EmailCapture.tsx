@@ -1,42 +1,101 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Button } from "./Button";
+import { createBrowserClient } from "@/lib/supabase/client";
+
+/** Prosty regex — wystarczający do podstawowej walidacji formatu email */
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export function EmailCapture({ buttonText = "Pobierz darmowy ebook" }: { buttonText?: string }) {
+  const router = useRouter();
   const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email) return;
-    console.log("Email captured:", email);
-    setSubmitted(true);
-  };
+    setErrorMessage(null);
 
-  if (submitted) {
-    return (
-      <div className="rounded-lg border border-gold/30 bg-gold/5 px-6 py-5 text-center">
-        <p className="text-lg font-semibold text-gold">Gotowe.</p>
-        <p className="mt-1 text-sm text-muted">
-          Sprawdź skrzynkę. Ebook jest w drodze.
-        </p>
-      </div>
-    );
-  }
+    const trimmed = email.trim();
+
+    // Walidacja: niepusty
+    if (!trimmed) {
+      setErrorMessage("Podaj adres email.");
+      return;
+    }
+
+    // Walidacja: wygląda jak email
+    if (!EMAIL_REGEX.test(trimmed)) {
+      setErrorMessage("Podaj poprawny adres email.");
+      return;
+    }
+
+    setSubmitting(true);
+
+    try {
+      // Klient Supabase (tylko frontend + klucz anon)
+      const supabase = createBrowserClient();
+
+      // INSERT do tabeli leads — kolumna email musi być unikalna
+      const { error } = await supabase.from("leads").insert({ email: trimmed });
+
+      if (error) {
+        // Błąd unikalności (email już w bazie)
+        if (error.code === "23505") {
+          console.error("[leads] Ten email jest już zapisany:", error.message);
+          setErrorMessage("Ten adres jest już zapisany.");
+          return;
+        }
+        console.error("[leads] Błąd Supabase:", error.message, error);
+        setErrorMessage("Coś poszło nie tak. Spróbuj ponownie za chwilę.");
+        return;
+      }
+
+      // Sukces → przekierowanie na stronę podziękowania
+      router.push("/dzieki");
+    } catch (err) {
+      console.error("[leads] Nieoczekiwany błąd:", err);
+      if (err instanceof Error && err.message === "SUPABASE_ENV_MISSING") {
+        setErrorMessage(
+          "Brak konfiguracji Supabase. W pliku .env uzupełnij NEXT_PUBLIC_SUPABASE_URL i NEXT_PUBLIC_SUPABASE_ANON_KEY, zapisz plik i uruchom ponownie npm run dev. Na Vercelu dodaj te same zmienne w Settings → Environment Variables."
+        );
+      } else {
+        setErrorMessage("Problem z siecią lub serwerem. Spróbuj za chwilę.");
+      }
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-3 sm:flex-row">
-      <input
-        type="email"
-        required
-        placeholder="Twój E-Mail"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        className="flex-1 rounded-lg border border-border bg-surface-light px-5 py-3.5 text-foreground placeholder:text-muted focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold/50 transition-colors"
-      />
-      <Button type="submit" variant="primary" size="default">
-        {buttonText}
+      <div className="flex flex-1 flex-col gap-1">
+        <input
+          type="email"
+          name="email"
+          autoComplete="email"
+          placeholder="Twój E-Mail"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          disabled={submitting}
+          className="w-full rounded-lg border border-border bg-surface-light px-5 py-3.5 text-foreground placeholder:text-muted focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold/50 transition-colors disabled:opacity-60"
+        />
+        {errorMessage ? (
+          <p className="text-xs text-red-400" role="alert">
+            {errorMessage}
+          </p>
+        ) : null}
+      </div>
+      <Button
+        type="submit"
+        variant="primary"
+        size="default"
+        className="shrink-0"
+        disabled={submitting}
+      >
+        {submitting ? "Zapisywanie…" : buttonText}
       </Button>
     </form>
   );

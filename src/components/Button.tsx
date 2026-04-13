@@ -8,6 +8,7 @@ type ButtonProps = {
   size?: "default" | "lg";
   className?: string;
   type?: "button" | "submit";
+  disabled?: boolean;
 };
 
 export function Button({
@@ -18,6 +19,7 @@ export function Button({
   size = "default",
   className = "",
   type = "button",
+  disabled = false,
 }: ButtonProps) {
   const base =
     "inline-flex items-center justify-center font-semibold tracking-wide uppercase transition-all duration-200 cursor-pointer rounded-lg";
@@ -47,7 +49,12 @@ export function Button({
   }
 
   return (
-    <button type={type} onClick={onClick} className={classes}>
+    <button
+      type={type}
+      onClick={onClick}
+      disabled={disabled}
+      className={`${classes} disabled:pointer-events-none disabled:opacity-50`}
+    >
       {children}
     </button>
   );
